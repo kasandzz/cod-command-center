@@ -17,16 +17,74 @@
     <div id="header-mount"></div>
     <div class="page-header">
       <h1 class="page-title">Full Funnel</h1>
-      <div class="filter-bar" id="filter-bar"></div>
+      <div class="filter-bar" id="filter-bar">
+        <select class="filter-dropdown" id="segment-select">
+          <option value="all">All Segments</option>
+          <option value="therapists">Therapists & Counselors</option>
+          <option value="lawyers">Lawyers & Legal</option>
+          <option value="coaches">Coaches & Consultants</option>
+          <option value="healthcare">Healthcare (non-therapy)</option>
+          <option value="education">Education & Training</option>
+          <option value="other">Real Estate, Finance, Other</option>
+        </select>
+      </div>
     </div>
     <div class="page-content">
-      <p style="color: var(--text-muted);">Coming soon...</p>
+      <p style="color:var(--text-muted);font-size:12px;margin-bottom:16px;">Complete funnel from ad click to enrollment. Today's data is always partial.<br>Revenue includes GHL-tracked sales only. Ticket counts from workshop bookings sheet.</p>
+
+      <!-- Segment Breakdown (shown when filtered) -->
+      <div class="closer-detail" id="segment-overlay" style="display:none;"></div>
+
+      <!-- Interactive Sankey Diagram -->
+      <div class="chart-container">
+        <h3>Customer Journey (Interactive Sankey)</h3>
+        <div id="sankey-chart" style="height:500px;"></div>
+      </div>
+
+      <!-- Expanded Metrics Grid (12 cards) -->
+      <div class="kpi-grid" id="metrics-grid" style="grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));"></div>
+
+      <!-- Conversion Rate Cards with Traffic Lights -->
+      <div style="margin-bottom:8px;">
+        <h3 style="color:var(--text-secondary);font-size:14px;font-weight:400;padding:0 0 8px;">Conversion Rates vs Target</h3>
+      </div>
+      <div class="kpi-grid" id="conversion-grid"></div>
+
+      <!-- Conversion Trends (Chart.js) -->
+      <div class="chart-container">
+        <h3>Conversion Trends (Weekly)</h3>
+        <div class="chart-wrapper">
+          <canvas id="conversion-trend-chart"></canvas>
+        </div>
+      </div>
+
+      <!-- Period Comparison Table -->
+      <div class="table-container" style="background:var(--bg-card);border-radius:8px;overflow:hidden;">
+        <h3 style="color:var(--text-secondary);font-size:14px;font-weight:400;padding:16px 16px 0;">Period Comparison</h3>
+        <table class="data-table" id="comparison-table">
+          <thead>
+            <tr>
+              <th>Stage</th>
+              <th>This Period</th>
+              <th>Prior Period</th>
+              <th>Delta</th>
+              <th>Direction</th>
+              <th>Target</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="comparison-body"></tbody>
+        </table>
+      </div>
     </div>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-finance-3.5.0.min.js"></script>
   <script src="../assets/js/components.js"></script>
   <script src="../assets/js/filters.js"></script>
   <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/data-utils.js"></script>
+  <script src="../assets/js/full-funnel.js"></script>
 </body>
 </html>

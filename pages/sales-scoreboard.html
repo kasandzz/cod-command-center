@@ -17,10 +17,53 @@
     <div id="header-mount"></div>
     <div class="page-header">
       <h1 class="page-title">Sales Scoreboard</h1>
-      <div class="filter-bar" id="filter-bar"></div>
+      <div class="filter-bar" id="filter-bar">
+        <select class="filter-dropdown" id="closer-select">
+          <option value="">All Closers</option>
+        </select>
+      </div>
     </div>
     <div class="page-content">
-      <p style="color: var(--text-muted);">Coming soon...</p>
+      <p style="color:var(--text-muted);font-size:12px;margin-bottom:16px;">Revenue and enrollment data from GHL. Closer name matching is approximate.</p>
+
+      <!-- Closer Detail Card (hidden by default) -->
+      <div class="closer-detail" id="closer-detail" style="display:none;"></div>
+
+      <!-- Leaderboard Table -->
+      <div class="table-container" style="background:var(--bg-card);border-radius:8px;overflow:hidden;margin-bottom:24px;">
+        <table class="data-table" id="leaderboard-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Closer</th>
+              <th class="sortable desc" data-column="dpl_cash">DPL Cash</th>
+              <th class="sortable" data-column="dpl_contract">DPL Contract</th>
+              <th class="sortable" data-column="close_rate">Close Rate</th>
+              <th class="sortable" data-column="show_rate">Show Rate</th>
+              <th class="sortable" data-column="total_calls">Total Calls</th>
+              <th class="sortable" data-column="enrollments">Enrollments</th>
+              <th class="sortable" data-column="cash_collected">Cash Collected</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body"></tbody>
+        </table>
+      </div>
+
+      <!-- Charts Row (2-col grid) -->
+      <div class="chart-row">
+        <div class="chart-container">
+          <h3>Call Dispositions</h3>
+          <div class="chart-wrapper">
+            <canvas id="dispositions-chart"></canvas>
+          </div>
+        </div>
+        <div class="chart-container">
+          <h3>Close Rate Trend</h3>
+          <div class="chart-wrapper">
+            <canvas id="close-rate-chart"></canvas>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
@@ -28,5 +71,7 @@
   <script src="../assets/js/components.js"></script>
   <script src="../assets/js/filters.js"></script>
   <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/data-utils.js"></script>
+  <script src="../assets/js/sales-scoreboard.js"></script>
 </body>
 </html>

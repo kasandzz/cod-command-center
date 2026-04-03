@@ -1,38 +1,70 @@
 {
   "generated_at": "2026-04-02T06:00:00Z",
-  "period": { "from": "2026-03-03", "to": "2026-04-01" },
-  "closers": [
-    { "name": "Closer A", "close_rate": 0.31, "show_rate": 0.72, "dpl": 9800, "revenue": 39200, "calls": 16, "enrollments": 4 },
-    { "name": "Closer B", "close_rate": 0.27, "show_rate": 0.68, "dpl": 8500, "revenue": 34000, "calls": 15, "enrollments": 4 },
-    { "name": "Closer C", "close_rate": 0.23, "show_rate": 0.65, "dpl": 7200, "revenue": 21600, "calls": 13, "enrollments": 3 },
-    { "name": "Closer D", "close_rate": 0.20, "show_rate": 0.70, "dpl": 8000, "revenue": 16000, "calls": 10, "enrollments": 2 },
-    { "name": "Closer E", "close_rate": 0.18, "show_rate": 0.60, "dpl": 6300, "revenue": 12600, "calls": 10, "enrollments": 2 }
+  "period": { "from": "2026-03-01", "to": "2026-03-31" },
+  "leaderboard": [
+    {
+      "closer": "Matt Dakan",
+      "dpl_cash": 9800,
+      "dpl_contract": 12400,
+      "close_rate": 0.310,
+      "show_rate": 0.72,
+      "total_calls": 42,
+      "enrollments": 10,
+      "cash_collected": 98000
+    },
+    {
+      "closer": "Dorian Matney",
+      "dpl_cash": 8100,
+      "dpl_contract": 10800,
+      "close_rate": 0.267,
+      "show_rate": 0.68,
+      "total_calls": 45,
+      "enrollments": 9,
+      "cash_collected": 72900
+    },
+    {
+      "closer": "Colby Mann",
+      "dpl_cash": 7400,
+      "dpl_contract": 9600,
+      "close_rate": 0.227,
+      "show_rate": 0.65,
+      "total_calls": 37,
+      "enrollments": 6,
+      "cash_collected": 44400
+    },
+    {
+      "closer": "Bren Moran",
+      "dpl_cash": 5200,
+      "dpl_contract": 7000,
+      "close_rate": 0.182,
+      "show_rate": 0.62,
+      "total_calls": 33,
+      "enrollments": 4,
+      "cash_collected": 20800
+    }
   ],
-  "call_dispositions": [
-    { "closer": "Closer A", "outcome": "Enrolled", "count": 4 },
-    { "closer": "Closer A", "outcome": "No Show", "count": 4 },
-    { "closer": "Closer A", "outcome": "Not Qualified", "count": 2 },
-    { "closer": "Closer A", "outcome": "Money Objection", "count": 3 },
-    { "closer": "Closer A", "outcome": "Needs Follow-up", "count": 3 },
-    { "closer": "Closer B", "outcome": "Enrolled", "count": 4 },
-    { "closer": "Closer B", "outcome": "No Show", "count": 5 },
-    { "closer": "Closer B", "outcome": "Not Qualified", "count": 2 },
-    { "closer": "Closer B", "outcome": "Money Objection", "count": 2 },
-    { "closer": "Closer B", "outcome": "Needs Follow-up", "count": 2 },
-    { "closer": "Closer C", "outcome": "Enrolled", "count": 3 },
-    { "closer": "Closer C", "outcome": "No Show", "count": 4 },
-    { "closer": "Closer C", "outcome": "Not Qualified", "count": 3 },
-    { "closer": "Closer C", "outcome": "Money Objection", "count": 2 },
-    { "closer": "Closer C", "outcome": "Needs Follow-up", "count": 1 },
-    { "closer": "Closer D", "outcome": "Enrolled", "count": 2 },
-    { "closer": "Closer D", "outcome": "No Show", "count": 3 },
-    { "closer": "Closer D", "outcome": "Not Qualified", "count": 2 },
-    { "closer": "Closer D", "outcome": "Money Objection", "count": 2 },
-    { "closer": "Closer D", "outcome": "Needs Follow-up", "count": 1 },
-    { "closer": "Closer E", "outcome": "Enrolled", "count": 2 },
-    { "closer": "Closer E", "outcome": "No Show", "count": 4 },
-    { "closer": "Closer E", "outcome": "Not Qualified", "count": 1 },
-    { "closer": "Closer E", "outcome": "Money Objection", "count": 2 },
-    { "closer": "Closer E", "outcome": "Needs Follow-up", "count": 1 }
-  ]
+  "dispositions": [
+    { "closer": "Matt Dakan", "enrolled": 10, "no_sale": 12, "follow_up": 8, "no_show": 9, "cancelled": 3 },
+    { "closer": "Dorian Matney", "enrolled": 9, "no_sale": 14, "follow_up": 7, "no_show": 11, "cancelled": 4 },
+    { "closer": "Colby Mann", "enrolled": 6, "no_sale": 10, "follow_up": 9, "no_show": 9, "cancelled": 3 },
+    { "closer": "Bren Moran", "enrolled": 4, "no_sale": 8, "follow_up": 7, "no_show": 10, "cancelled": 4 }
+  ],
+  "close_rate_trend": [
+    { "week": "2026-W05", "Matt Dakan": 0.25, "Dorian Matney": 0.26, "Colby Mann": 0.20, "Bren Moran": 0.22 },
+    { "week": "2026-W06", "Matt Dakan": 0.27, "Dorian Matney": 0.25, "Colby Mann": 0.19, "Bren Moran": 0.21 },
+    { "week": "2026-W07", "Matt Dakan": 0.29, "Dorian Matney": 0.28, "Colby Mann": 0.21, "Bren Moran": 0.20 },
+    { "week": "2026-W08", "Matt Dakan": 0.28, "Dorian Matney": 0.26, "Colby Mann": 0.22, "Bren Moran": 0.19 },
+    { "week": "2026-W09", "Matt Dakan": 0.31, "Dorian Matney": 0.27, "Colby Mann": 0.23, "Bren Moran": 0.18 },
+    { "week": "2026-W10", "Matt Dakan": 0.30, "Dorian Matney": 0.25, "Colby Mann": 0.22, "Bren Moran": 0.17 },
+    { "week": "2026-W11", "Matt Dakan": 0.33, "Dorian Matney": 0.28, "Colby Mann": 0.24, "Bren Moran": 0.17 },
+    { "week": "2026-W12", "Matt Dakan": 0.35, "Dorian Matney": 0.27, "Colby Mann": 0.25, "Bren Moran": 0.16 }
+  ],
+  "team_averages": {
+    "dpl_cash": 7625,
+    "dpl_contract": 9950,
+    "close_rate": 0.247,
+    "show_rate": 0.668,
+    "total_calls": 39,
+    "enrollments": 7
+  }
 }

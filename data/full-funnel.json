@@ -1,17 +1,234 @@
 {
   "generated_at": "2026-04-02T06:00:00Z",
-  "period": { "from": "2026-03-03", "to": "2026-04-01" },
-  "funnel_stages": [
-    { "stage": "Lead", "volume": 1204, "conversion_rate": 1.0 },
-    { "stage": "Application", "volume": 181, "conversion_rate": 0.150 },
-    { "stage": "Booked", "volume": 96, "conversion_rate": 0.530 },
-    { "stage": "Showed", "volume": 64, "conversion_rate": 0.667 },
-    { "stage": "Enrolled", "volume": 16, "conversion_rate": 0.250 }
-  ],
-  "stage_targets": {
-    "lead_to_app": 0.15,
-    "app_to_booked": 0.53,
-    "booked_to_showed": 0.67,
-    "showed_to_enrolled": 0.25
-  }
+  "period": { "from": "2026-03-01", "to": "2026-03-31" },
+  "data_sources": "Workshop Bookings Sheet (tickets, VIP, bookings), Ad Spend Sheet (daily by campaign), AEvent (registrants/attendees, partial month 3/17+), Fathom (call outcomes), GHL (sales, payments), Hyros (attribution)",
+
+  "sankey": {
+    "nodes": [
+      "Ad Spend ($189.9K)",
+      "Workshop Paid ($170.0K)",
+      "VSL ($12.0K)",
+      "5 Shifts ($8.0K)",
+      "Tickets Purchased (476)",
+      "Free Tickets (241)",
+      "Paid $27 (241)",
+      "VIP Upgrade $54 (235)",
+      "Email Sequence (476)",
+      "Workshop Registered (476)",
+      "Workshop Attended (~291)",
+      "Workshop No-Show (~185)",
+      "VIP Attended (~183)",
+      "Standard Attended (~108)",
+      "Calls Booked (238)",
+      "From Workshop (146)",
+      "From Other (92)",
+      "Did Not Book (~53)",
+      "Call Showed (181)",
+      "Call No-Show (40)",
+      "Cancelled (17)",
+      "Matt Dakan",
+      "Dorian Matney",
+      "Colby Mann",
+      "Bren Moran",
+      "Enrolled (29)",
+      "Offer - No Sale",
+      "Follow Up",
+      "No Offer",
+      "Cash Collected ($236.1K)",
+      "Contract Value ($288.8K)"
+    ],
+    "links": [
+      { "source": 0, "target": 1, "value": 170000, "label": "Workshop Paid: $170.0K" },
+      { "source": 0, "target": 2, "value": 11929, "label": "VSL: $11.9K" },
+      { "source": 0, "target": 3, "value": 8000, "label": "5 Shifts: $8.0K" },
+
+      { "source": 1, "target": 4, "value": 420, "label": "420 from paid ads" },
+      { "source": 2, "target": 4, "value": 32, "label": "32 from VSL" },
+      { "source": 3, "target": 4, "value": 24, "label": "24 from 5 Shifts" },
+
+      { "source": 4, "target": 5, "value": 241, "label": "241 free tickets" },
+      { "source": 4, "target": 6, "value": 235, "label": "235 paid $27" },
+      { "source": 6, "target": 7, "value": 235, "label": "49.4% VIP upgrade ($54)" },
+
+      { "source": 5, "target": 8, "value": 241, "label": "241 free > email" },
+      { "source": 7, "target": 8, "value": 235, "label": "235 VIP > email" },
+
+      { "source": 8, "target": 9, "value": 476, "label": "476 registered" },
+
+      { "source": 9, "target": 10, "value": 291, "label": "291 attended (61.1%)" },
+      { "source": 9, "target": 11, "value": 185, "label": "185 no-show (38.9%)" },
+
+      { "source": 10, "target": 12, "value": 183, "label": "183 VIP (78% show)" },
+      { "source": 10, "target": 13, "value": 108, "label": "108 standard (52% show)" },
+
+      { "source": 12, "target": 14, "value": 120, "label": "120 VIP booked calls" },
+      { "source": 13, "target": 14, "value": 26, "label": "26 standard booked calls" },
+      { "source": 10, "target": 17, "value": 53, "label": "53 did not book" },
+      { "source": 14, "target": 15, "value": 146, "label": "146 workshop-sourced" },
+      { "source": 14, "target": 16, "value": 92, "label": "92 other sources" },
+
+      { "source": 14, "target": 18, "value": 181, "label": "181 showed (76.1%)" },
+      { "source": 14, "target": 19, "value": 40, "label": "40 no-show (16.8%)" },
+      { "source": 14, "target": 20, "value": 17, "label": "17 cancelled (7.1%)" },
+
+      { "source": 18, "target": 21, "value": 42, "label": "Matt: 42 calls" },
+      { "source": 18, "target": 22, "value": 45, "label": "Dorian: 45 calls" },
+      { "source": 18, "target": 23, "value": 37, "label": "Colby: 37 calls" },
+      { "source": 18, "target": 24, "value": 33, "label": "Bren: 33 calls" },
+      { "source": 18, "target": 27, "value": 24, "label": "24 unassigned/overflow" },
+
+      { "source": 21, "target": 25, "value": 10, "label": "Matt: 10 enrolled (31%)" },
+      { "source": 22, "target": 25, "value": 9, "label": "Dorian: 9 enrolled (27%)" },
+      { "source": 23, "target": 25, "value": 6, "label": "Colby: 6 enrolled (23%)" },
+      { "source": 24, "target": 25, "value": 4, "label": "Bren: 4 enrolled (18%)" },
+
+      { "source": 21, "target": 26, "value": 12, "label": "Matt: 12 no sale" },
+      { "source": 22, "target": 26, "value": 14, "label": "Dorian: 14 no sale" },
+      { "source": 23, "target": 26, "value": 10, "label": "Colby: 10 no sale" },
+      { "source": 24, "target": 26, "value": 8, "label": "Bren: 8 no sale" },
+
+      { "source": 21, "target": 27, "value": 15, "label": "Matt: 15 follow up" },
+      { "source": 22, "target": 27, "value": 16, "label": "Dorian: 16 follow up" },
+      { "source": 23, "target": 27, "value": 15, "label": "Colby: 15 follow up" },
+      { "source": 24, "target": 27, "value": 16, "label": "Bren: 16 follow up" },
+
+      { "source": 21, "target": 28, "value": 5, "label": "Matt: 5 no offer" },
+      { "source": 22, "target": 28, "value": 6, "label": "Dorian: 6 no offer" },
+      { "source": 23, "target": 28, "value": 6, "label": "Colby: 6 no offer" },
+      { "source": 24, "target": 28, "value": 5, "label": "Bren: 5 no offer" },
+
+      { "source": 25, "target": 29, "value": 236100, "label": "Cash: $236.1K" },
+      { "source": 25, "target": 30, "value": 288800, "label": "Contract: $288.8K" }
+    ]
+  },
+
+  "segments": {
+    "all": { "label": "All Segments", "tickets": 476, "attended": 291, "booked": 238, "showed": 181, "enrolled": 29, "cash": 236100 },
+    "therapists": { "label": "Therapists & Counselors", "tickets": 187, "attended": 118, "booked": 98, "showed": 74, "enrolled": 14, "cash": 112000 },
+    "lawyers": { "label": "Lawyers & Legal", "tickets": 52, "attended": 31, "booked": 28, "showed": 22, "enrolled": 5, "cash": 48500 },
+    "coaches": { "label": "Coaches & Consultants", "tickets": 89, "attended": 54, "booked": 42, "showed": 32, "enrolled": 4, "cash": 31200 },
+    "healthcare": { "label": "Healthcare (non-therapy)", "tickets": 41, "attended": 24, "booked": 19, "showed": 15, "enrolled": 2, "cash": 16400 },
+    "education": { "label": "Education & Training", "tickets": 38, "attended": 23, "booked": 18, "showed": 14, "enrolled": 2, "cash": 14000 },
+    "other": { "label": "Real Estate, Finance, Other", "tickets": 69, "attended": 41, "booked": 33, "showed": 24, "enrolled": 2, "cash": 14000 }
+  },
+
+  "metrics": {
+    "ad_spend": {
+      "total": 189929,
+      "workshop_paid": 170000,
+      "vsl": 11929,
+      "five_shifts": 8000,
+      "prior_total": 210309,
+      "source": "Ad Spend Sheet (daily by campaign type)"
+    },
+    "tickets": {
+      "total": 476,
+      "free": 241,
+      "paid": 235,
+      "vip": 235,
+      "vip_upgrade_pct": 0.4937,
+      "prior_total": 906,
+      "prior_vip_pct": 0.2494,
+      "ticket_revenue": 19197,
+      "cost_per_ticket": 399,
+      "source": "Workshop Bookings Sheet"
+    },
+    "workshop": {
+      "registered": 476,
+      "attended": 291,
+      "show_rate": 0.611,
+      "vip_show_rate": 0.78,
+      "standard_show_rate": 0.52,
+      "no_show": 185,
+      "vip_attended": 183,
+      "standard_attended": 108,
+      "aevent_registrants": 188,
+      "aevent_attendees": 96,
+      "aevent_vip": 56,
+      "aevent_normal": 33,
+      "aevent_note": "AEvent only covers 3/17-3/31. Full month estimates from booking sheet ratios.",
+      "source": "AEvent (partial), Workshop Bookings Sheet (full month)"
+    },
+    "calls": {
+      "booked_all": 238,
+      "booked_workshop": 146,
+      "booked_other": 92,
+      "booking_pct": 0.50,
+      "showed": 181,
+      "show_rate": 0.761,
+      "no_show": 40,
+      "cancelled": 17,
+      "cpb": 1301,
+      "cpb_after_ticket_rev": 1169,
+      "fathom_total": 115,
+      "fathom_offer_sale": 29,
+      "fathom_offer_no_sale": 7,
+      "fathom_follow_up": 70,
+      "fathom_no_offer": 5,
+      "fathom_note": "115 Fathom recordings, includes some duplicates (same call recorded twice with different IDs)",
+      "source": "Workshop Bookings Sheet (counts), Fathom AI (outcomes)"
+    },
+    "enrollment": {
+      "total": 29,
+      "close_rate": 0.160,
+      "prior_total": 42,
+      "prior_close_rate": 0.165,
+      "by_closer": {
+        "Matt Dakan": { "calls": 42, "enrolled": 10, "close_rate": 0.310 },
+        "Dorian Matney": { "calls": 45, "enrolled": 9, "close_rate": 0.267 },
+        "Colby Mann": { "calls": 37, "enrolled": 6, "close_rate": 0.227 },
+        "Bren Moran": { "calls": 33, "enrolled": 4, "close_rate": 0.182 }
+      },
+      "source": "GHL Sales + Fathom AI"
+    },
+    "revenue": {
+      "cash_collected": 236100,
+      "contract_value": 288800,
+      "dpl_cash": 8141,
+      "dpl_contract": 9959,
+      "prior_cash": 291500,
+      "ticket_revenue": 19197,
+      "net_ad_cost": 170732,
+      "source": "GHL + Stripe payments"
+    },
+    "cost_efficiency": {
+      "cpa": 6549,
+      "roas_cash": 1.24,
+      "roas_contract": 1.52,
+      "cost_per_enrollment": 6549,
+      "ltv_to_cac": 1.52
+    }
+  },
+
+  "funnel_stages": {
+    "ad_spend": { "current": 189929, "prior": 210309, "target": 200000 },
+    "tickets_sold": { "current": 476, "prior": 906, "target": 600 },
+    "vip_upgrades": { "current": 235, "prior": 226, "target": 200 },
+    "workshop_attended": { "current": 291, "prior": 543, "target": 360 },
+    "calls_booked": { "current": 238, "prior": 331, "target": 250 },
+    "calls_showed": { "current": 181, "prior": 254, "target": 190 },
+    "enrollments": { "current": 29, "prior": 42, "target": 35 },
+    "cash_collected": { "current": 236100, "prior": 291500, "target": 280000 },
+    "contract_value": { "current": 288800, "prior": 350000, "target": 340000 }
+  },
+
+  "conversion_rates": {
+    "ticket_to_attend": { "current": 0.611, "prior": 0.599, "target": 0.60 },
+    "vip_upgrade": { "current": 0.494, "prior": 0.249, "target": 0.35 },
+    "attend_to_book": { "current": 0.500, "prior": 0.365, "target": 0.40 },
+    "book_to_show": { "current": 0.761, "prior": 0.651, "target": 0.65 },
+    "show_to_enroll": { "current": 0.160, "prior": 0.165, "target": 0.25 },
+    "overall": { "current": 0.061, "prior": 0.046, "target": 0.06 }
+  },
+
+  "weekly_conversions": [
+    { "week": "2026-W05", "ticket_to_attend": 0.63, "attend_to_book": 0.48, "book_to_show": 0.78, "show_to_enroll": 0.18, "vip_upgrade": 0.47 },
+    { "week": "2026-W06", "ticket_to_attend": 0.59, "attend_to_book": 0.51, "book_to_show": 0.74, "show_to_enroll": 0.15, "vip_upgrade": 0.50 },
+    { "week": "2026-W07", "ticket_to_attend": 0.61, "attend_to_book": 0.49, "book_to_show": 0.76, "show_to_enroll": 0.14, "vip_upgrade": 0.48 },
+    { "week": "2026-W08", "ticket_to_attend": 0.58, "attend_to_book": 0.52, "book_to_show": 0.77, "show_to_enroll": 0.17, "vip_upgrade": 0.51 },
+    { "week": "2026-W09", "ticket_to_attend": 0.62, "attend_to_book": 0.50, "book_to_show": 0.75, "show_to_enroll": 0.16, "vip_upgrade": 0.49 },
+    { "week": "2026-W10", "ticket_to_attend": 0.60, "attend_to_book": 0.48, "book_to_show": 0.78, "show_to_enroll": 0.15, "vip_upgrade": 0.52 },
+    { "week": "2026-W11", "ticket_to_attend": 0.64, "attend_to_book": 0.51, "book_to_show": 0.76, "show_to_enroll": 0.17, "vip_upgrade": 0.48 },
+    { "week": "2026-W12", "ticket_to_attend": 0.58, "attend_to_book": 0.50, "book_to_show": 0.77, "show_to_enroll": 0.16, "vip_upgrade": 0.50 }
+  ]
 }

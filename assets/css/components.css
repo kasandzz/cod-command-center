@@ -314,3 +314,137 @@
 .chart-wrapper {
   height: 300px;
 }
+
+/* Waterfall Chart (Plotly) - taller than standard Chart.js wrapper */
+.chart-wrapper.waterfall {
+  height: 400px;
+}
+
+/* Filter Dropdown (closer selector) */
+.filter-dropdown {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-family: var(--font-family);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 32px;
+}
+
+.filter-dropdown:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  color: var(--text-primary);
+}
+
+/* Closer Detail Card */
+.closer-detail {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.closer-detail .closer-name {
+  grid-column: 1 / -1;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.closer-detail .stat-pair {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.closer-detail .stat-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.closer-detail .stat-value {
+  font-size: 28px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.closer-detail .stat-vs-avg {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.closer-detail .stat-vs-avg.above { color: var(--status-up); }
+.closer-detail .stat-vs-avg.below { color: var(--status-down); }
+
+.closer-detail .stat-sparkline {
+  height: 32px;
+  margin-top: 4px;
+}
+
+/* Sortable Table Headers */
+.data-table th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+.data-table th.sortable:hover {
+  color: var(--text-primary);
+}
+
+.data-table th.sortable::after {
+  content: "";
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 6px;
+  vertical-align: middle;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid var(--text-muted);
+}
+
+.data-table th.sortable.asc::after {
+  border-top: none;
+  border-bottom: 4px solid var(--accent-primary);
+}
+
+.data-table th.sortable.desc::after {
+  border-top: 4px solid var(--accent-primary);
+}
+
+/* Redacted Cell (sales audience - other closers) */
+.redacted {
+  color: var(--text-muted);
+  font-style: normal;
+  user-select: none;
+}
+
+/* Two-Column Chart Row */
+.chart-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 1023px) {
+  .chart-row {
+    grid-template-columns: 1fr;
+  }
+}
