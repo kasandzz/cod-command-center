@@ -8,12 +8,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     initDatePicker();
   }
 
-  // 3. Initialize notes panel (added in Plan 03)
-  if (typeof initNotes === 'function') {
-    initNotes();
-  }
-
-  // 4. Mobile banner visibility
+  // 3. Mobile banner visibility
   if (window.innerWidth < 768) {
     var banner = document.querySelector('.mobile-banner');
     if (banner) banner.style.display = 'block';
