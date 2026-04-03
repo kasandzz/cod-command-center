@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full Funnel - Customer Journey</title>
+  <script src="https://cdn.plot.ly/plotly-3.5.0.min.js" charset="utf-8"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #020617; color: #e2e8f0; font-family: Inter, system-ui, -apple-system, sans-serif; }
+    .page-wrap { max-width: 1440px; margin: 0 auto; padding: 24px; }
+    h1 { font-size: 18px; color: #f8fafc; margin-bottom: 4px; }
+    .subtitle { font-size: 12px; color: #64748b; margin-bottom: 24px; }
+
+    /* ===================== CHEVRON PIPELINE ===================== */
+    .pipeline { display: flex; gap: 0; margin-bottom: 0; overflow-x: auto; }
+    .pillar {
+      flex: 1; min-width: 160px; position: relative;
+      padding: 14px 18px 14px 28px;
+      clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%, 16px 50%);
+      text-align: center;
+    }
+    .pillar:first-child { clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%); padding-left: 18px; }
+    .pillar-name { font-size: 13px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
+    .pillar-count { font-size: 22px; font-weight: 800; color: #fff; margin: 2px 0; }
+    .pillar-conv { font-size: 11px; color: rgba(255,255,255,0.75); }
+
+    /* Pillar colors */
+    .pillar-acquisition { background: #ef4444; }
+    .pillar-registration { background: #f59e0b; }
+    .pillar-workshop { background: #22c55e; }
+    .pillar-sales { background: #3b82f6; }
+    .pillar-revenue { background: #8b5cf6; }
+    .pillar-outcome { background: #06b6d4; }
+
+    /* ===================== METRICS STRIP ===================== */
+    .metrics-strip {
+      display: flex; gap: 0; background: #0f172a; border: 1px solid #1e293b;
+      border-radius: 0 0 8px 8px; margin-bottom: 24px; overflow-x: auto;
+    }
+    .metric-col {
+      flex: 1; min-width: 160px; padding: 12px 14px;
+      border-right: 1px solid #1e293b;
+    }
+    .metric-col:last-child { border-right: none; }
+    .metric-item { margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+    .metric-badge {
+      font-size: 9px; font-weight: 700; padding: 2px 5px; border-radius: 3px;
+      min-width: 20px; text-align: center; color: #fff; flex-shrink: 0;
+    }
+    .badge-green { background: #22c55e; }
+    .badge-red { background: #ef4444; }
+    .badge-yellow { background: #f59e0b; }
+    .badge-blue { background: #3b82f6; }
+    .badge-purple { background: #8b5cf6; }
+    .badge-cyan { background: #06b6d4; }
+    .badge-gray { background: #475569; }
+    .metric-text { font-size: 11px; color: #94a3b8; }
+    .metric-text strong { color: #e2e8f0; font-weight: 600; }
+
+    /* Drop-off callouts */
+    .dropoff-row {
+      display: flex; gap: 0; margin-bottom: 24px; overflow-x: auto;
+    }
+    .dropoff-col {
+      flex: 1; min-width: 160px; padding: 0 14px; text-align: center;
+    }
+    .dropoff-arrow {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 12px;
+    }
+    .dropoff-arrow.loss { background: #ef444420; color: #ef4444; }
+    .dropoff-arrow.gain { background: #22c55e20; color: #22c55e; }
+    .dropoff-arrow.neutral { background: #64748b20; color: #64748b; }
+    .dropoff-detail { font-size: 10px; color: #64748b; margin-top: 3px; }
+
+    /* ===================== SANKEY ===================== */
+    .sankey-section {
+      background: #0f172a; border-radius: 12px; border: 1px solid #1e293b;
+      padding: 20px; margin-bottom: 24px;
+    }
+    .section-title { font-size: 14px; color: #94a3b8; font-weight: 400; margin-bottom: 12px; }
+    #sankey-chart { width: 100%; height: 520px; }
+
+    /* ===================== SEGMENT TABLE ===================== */
+    .segment-section {
+      background: #0f172a; border-radius: 12px; border: 1px solid #1e293b;
+      padding: 20px; margin-bottom: 24px; overflow-x: auto;
+    }
+    .seg-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .seg-table th {
+      text-align: center; padding: 10px 12px; color: #020617; font-weight: 700;
+      font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .seg-table th:first-child { text-align: left; background: #1e293b; color: #94a3b8; }
+    .seg-table td { text-align: center; padding: 10px 12px; border-top: 1px solid #1e293b; }
+    .seg-table td:first-child { text-align: left; color: #e2e8f0; font-weight: 600; }
+    .seg-table tbody tr:hover { background: #1e293b40; }
+    .cell-pct { font-size: 14px; font-weight: 700; display: block; }
+    .cell-abs { font-size: 11px; color: #64748b; display: block; }
+    .pct-green { color: #22c55e; }
+    .pct-yellow { color: #f59e0b; }
+    .pct-red { color: #ef4444; }
+    .pct-blue { color: #38bdf8; }
+    .pct-purple { color: #a78bfa; }
+    .pct-cyan { color: #06b6d4; }
+
+    /* Column header colors matching pillars */
+    .th-acquisition { background: #ef4444; }
+    .th-registration { background: #f59e0b; }
+    .th-workshop { background: #22c55e; }
+    .th-sales { background: #3b82f6; }
+    .th-revenue { background: #8b5cf6; }
+    .th-outcome { background: #06b6d4; }
+
+    /* ===================== CLOSER MINI-TABLE ===================== */
+    .closer-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px; margin-top: 16px;
+    }
+    .closer-card {
+      background: #1e293b; border-radius: 8px; padding: 14px; border: 1px solid #334155;
+    }
+    .closer-card .cc-name { font-size: 13px; font-weight: 600; color: #f8fafc; margin-bottom: 8px; }
+    .closer-card .cc-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 4px; }
+    .closer-card .cc-label { color: #64748b; }
+    .closer-card .cc-val { color: #e2e8f0; font-weight: 600; }
+    .closer-card .cc-rate { font-size: 18px; font-weight: 700; }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <h1>Full Funnel -- Customer Journey</h1>
+    <p class="subtitle">March 2026 | Ad click to enrollment. Revenue includes GHL-tracked sales only.</p>
+
+    <!-- 1. CHEVRON PIPELINE -->
+    <div class="pipeline" id="pipeline"></div>
+
+    <!-- 2. METRICS STRIP -->
+    <div class="metrics-strip" id="metrics-strip"></div>
+
+    <!-- 3. DROP-OFF ROW -->
+    <div class="dropoff-row" id="dropoff-row"></div>
+
+    <!-- 4. INTERACTIVE SANKEY -->
+    <div class="sankey-section">
+      <div class="section-title">Customer Flow (hover for details)</div>
+      <div id="sankey-chart"></div>
+    </div>
+
+    <!-- 5. SEGMENT BREAKDOWN TABLE -->
+    <div class="segment-section">
+      <div class="section-title">Segment Breakdown</div>
+      <table class="seg-table" id="seg-table"></table>
+      <div class="section-title" style="margin-top:20px;">Closer Performance</div>
+      <div class="closer-grid" id="closer-grid"></div>
+    </div>
+  </div>
+
+<script>
+// ========================================
+// DATA
+// ========================================
+var D = {
+  adSpend: 189929, wkAds: 170000, vslAds: 11929, shiftsAds: 8000,
+  tickets: 476, free: 241, paid: 235, vip: 235, vipPct: 0.494,
+  registered: 476,
+  attended: 291, showRate: 0.611, vipAtt: 183, stdAtt: 108, noShowWk: 185,
+  vipShowRate: 0.78, stdShowRate: 0.52,
+  booked: 238, wkBooked: 146, otherBooked: 92, bookPct: 0.50, didNotBook: 53,
+  showed: 181, callShowRate: 0.761, noShowCall: 40, cancelled: 17,
+  enrolled: 29, closeRate: 0.160, noSale: 44, followUp: 62, noOffer: 22,
+  cash: 236100, contract: 288800, ticketRev: 19197,
+  cpt: 399, cpb: 1301, cpa: 6549, roasCash: 1.24, roasContract: 1.52,
+  prior: { spend: 210309, tickets: 906, attended: 543, booked: 331, showed: 254, enrolled: 42, cash: 291500, vipPct: 0.249 },
+  closers: [
+    { name: 'Matt Dakan', calls: 42, enrolled: 10, rate: 0.310, cash: 98000, noSale: 12, followUp: 15, noOffer: 5 },
+    { name: 'Dorian Matney', calls: 45, enrolled: 9, rate: 0.267, cash: 72900, noSale: 14, followUp: 16, noOffer: 6 },
+    { name: 'Colby Mann', calls: 37, enrolled: 6, rate: 0.227, cash: 44400, noSale: 10, followUp: 15, noOffer: 6 },
+    { name: 'Bren Moran', calls: 33, enrolled: 4, rate: 0.182, cash: 20800, noSale: 8, followUp: 16, noOffer: 5 }
+  ],
+  segments: [
+    { name: 'Therapists & Counselors', tickets: 187, attended: 118, booked: 98, showed: 74, enrolled: 14, cash: 112000 },
+    { name: 'Lawyers & Legal', tickets: 52, attended: 31, booked: 28, showed: 22, enrolled: 5, cash: 48500 },
+    { name: 'Coaches & Consultants', tickets: 89, attended: 54, booked: 42, showed: 32, enrolled: 4, cash: 31200 },
+    { name: 'Healthcare', tickets: 41, attended: 24, booked: 19, showed: 15, enrolled: 2, cash: 16400 },
+    { name: 'Education & Training', tickets: 38, attended: 23, booked: 18, showed: 14, enrolled: 2, cash: 14000 },
+    { name: 'Other', tickets: 69, attended: 41, booked: 33, showed: 24, enrolled: 2, cash: 14000 }
+  ]
+};
+
+function fmt(n) { return n >= 1000 ? '$' + (n/1000).toFixed(1) + 'K' : '$' + n; }
+function fmtN(n) { return n.toLocaleString(); }
+function pct(n) { return (n * 100).toFixed(1) + '%'; }
+function deltaPct(cur, prev) {
+  if (!prev) return { val: 0, text: '--', cls: 'neutral' };
+  var d = ((cur - prev) / prev * 100);
+  var prefix = d > 0 ? '+' : '';
+  return { val: d, text: prefix + d.toFixed(1) + '%', cls: d > 0 ? 'gain' : (d < 0 ? 'loss' : 'neutral') };
+}
+
+// ========================================
+// 1. CHEVRON PIPELINE
+// ========================================
+(function() {
+  var pillars = [
+    { cls: 'pillar-acquisition', name: 'Acquisition', count: fmt(D.adSpend), conv: fmtN(D.tickets) + ' tickets purchased' },
+    { cls: 'pillar-registration', name: 'Registration', count: fmtN(D.tickets), conv: pct(D.vipPct) + ' VIP upgrade' },
+    { cls: 'pillar-workshop', name: 'Workshop', count: fmtN(D.attended), conv: pct(D.showRate) + ' show rate' },
+    { cls: 'pillar-sales', name: 'Sales', count: fmtN(D.showed) + ' calls', conv: pct(D.callShowRate) + ' call show' },
+    { cls: 'pillar-revenue', name: 'Enrollment', count: fmtN(D.enrolled), conv: pct(D.closeRate) + ' close rate' },
+    { cls: 'pillar-outcome', name: 'Revenue', count: fmt(D.cash), conv: fmt(D.contract) + ' contract' }
+  ];
+
+  var html = '';
+  pillars.forEach(function(p) {
+    html += '<div class="pillar ' + p.cls + '">';
+    html += '<div class="pillar-name">' + p.name + '</div>';
+    html += '<div class="pillar-count">' + p.count + '</div>';
+    html += '<div class="pillar-conv">' + p.conv + '</div>';
+    html += '</div>';
+  });
+  document.getElementById('pipeline').innerHTML = html;
+})();
+
+// ========================================
+// 2. METRICS STRIP
+// ========================================
+(function() {
+  var cols = [
+    // Acquisition
+    [
+      { badge: 'badge-red', text: 'Workshop Ads: <strong>' + fmt(D.wkAds) + '</strong>' },
+      { badge: 'badge-red', text: 'VSL: <strong>' + fmt(D.vslAds) + '</strong>' },
+      { badge: 'badge-red', text: '5 Shifts: <strong>' + fmt(D.shiftsAds) + '</strong>' },
+      { badge: 'badge-gray', text: 'Cost/Ticket: <strong>' + fmt(D.cpt) + '</strong>' },
+      { badge: 'badge-gray', text: 'vs Prior: <strong>' + deltaPct(D.adSpend, D.prior.spend).text + '</strong>' }
+    ],
+    // Registration
+    [
+      { badge: 'badge-yellow', text: 'Free Tickets: <strong>' + fmtN(D.free) + '</strong>' },
+      { badge: 'badge-yellow', text: 'Paid $27: <strong>' + fmtN(D.paid) + '</strong>' },
+      { badge: 'badge-yellow', text: 'VIP $54: <strong>' + fmtN(D.vip) + ' (' + pct(D.vipPct) + ')</strong>' },
+      { badge: 'badge-gray', text: 'Ticket Rev: <strong>' + fmt(D.ticketRev) + '</strong>' },
+      { badge: 'badge-gray', text: 'vs Prior: <strong>' + deltaPct(D.tickets, D.prior.tickets).text + '</strong>' }
+    ],
+    // Workshop
+    [
+      { badge: 'badge-green', text: 'VIP Attended: <strong>' + fmtN(D.vipAtt) + ' (' + pct(D.vipShowRate) + ')</strong>' },
+      { badge: 'badge-green', text: 'Standard: <strong>' + fmtN(D.stdAtt) + ' (' + pct(D.stdShowRate) + ')</strong>' },
+      { badge: 'badge-red', text: 'No-Show: <strong>' + fmtN(D.noShowWk) + ' (' + pct(1 - D.showRate) + ')</strong>' },
+      { badge: 'badge-gray', text: 'vs Prior: <strong>' + deltaPct(D.attended, D.prior.attended).text + '</strong>' }
+    ],
+    // Sales
+    [
+      { badge: 'badge-blue', text: 'Booked (Workshop): <strong>' + fmtN(D.wkBooked) + '</strong>' },
+      { badge: 'badge-blue', text: 'Booked (Other): <strong>' + fmtN(D.otherBooked) + '</strong>' },
+      { badge: 'badge-red', text: 'No-Show: <strong>' + fmtN(D.noShowCall) + '</strong> | Cancel: <strong>' + fmtN(D.cancelled) + '</strong>' },
+      { badge: 'badge-red', text: 'Did Not Book: <strong>' + fmtN(D.didNotBook) + '</strong>' },
+      { badge: 'badge-gray', text: 'CPB: <strong>' + fmt(D.cpb) + '</strong>' }
+    ],
+    // Enrollment
+    [
+      { badge: 'badge-purple', text: 'Enrolled: <strong>' + fmtN(D.enrolled) + '</strong>' },
+      { badge: 'badge-red', text: 'No Sale: <strong>' + fmtN(D.noSale) + '</strong>' },
+      { badge: 'badge-yellow', text: 'Follow Up: <strong>' + fmtN(D.followUp) + '</strong>' },
+      { badge: 'badge-gray', text: 'No Offer: <strong>' + fmtN(D.noOffer) + '</strong>' },
+      { badge: 'badge-gray', text: 'CPA: <strong>' + fmt(D.cpa) + '</strong>' }
+    ],
+    // Revenue
+    [
+      { badge: 'badge-cyan', text: 'Cash: <strong>' + fmt(D.cash) + '</strong>' },
+      { badge: 'badge-cyan', text: 'Contract: <strong>' + fmt(D.contract) + '</strong>' },
+      { badge: 'badge-cyan', text: 'ROAS (cash): <strong>' + D.roasCash.toFixed(2) + 'x</strong>' },
+      { badge: 'badge-cyan', text: 'ROAS (contract): <strong>' + D.roasContract.toFixed(2) + 'x</strong>' },
+      { badge: 'badge-gray', text: 'vs Prior: <strong>' + deltaPct(D.cash, D.prior.cash).text + '</strong>' }
+    ]
+  ];
+
+  var html = '';
+  cols.forEach(function(metrics) {
+    html += '<div class="metric-col">';
+    metrics.forEach(function(m) {
+      html += '<div class="metric-item">';
+      html += '<span class="metric-badge ' + m.badge + '">&bull;</span>';
+      html += '<span class="metric-text">' + m.text + '</span>';
+      html += '</div>';
+    });
+    html += '</div>';
+  });
+  document.getElementById('metrics-strip').innerHTML = html;
+})();
+
+// ========================================
+// 3. DROP-OFF ROW
+// ========================================
+(function() {
+  var drops = [
+    { label: '', detail: '' }, // Acquisition (no drop-off from previous)
+    { delta: deltaPct(D.tickets, D.prior.tickets), lost: '', detail: '' },
+    { lost: fmtN(D.noShowWk) + ' no-show', delta: deltaPct(D.attended, D.prior.attended), detail: pct(1 - D.showRate) + ' drop-off' },
+    { lost: fmtN(D.didNotBook) + ' didn\'t book', delta: deltaPct(D.booked, D.prior.booked), detail: fmtN(D.noShowCall) + ' no-show + ' + fmtN(D.cancelled) + ' cancel' },
+    { lost: fmtN(D.showed - D.enrolled) + ' not enrolled', delta: deltaPct(D.enrolled, D.prior.enrolled), detail: fmtN(D.noSale) + ' no sale, ' + fmtN(D.followUp) + ' follow-up' },
+    { delta: deltaPct(D.cash, D.prior.cash), lost: '', detail: 'DPL: $' + Math.round(D.cash / D.enrolled).toLocaleString() }
+  ];
+
+  var html = '';
+  drops.forEach(function(d) {
+    html += '<div class="dropoff-col">';
+    if (d.delta) {
+      html += '<div class="dropoff-arrow ' + d.delta.cls + '">';
+      html += (d.delta.cls === 'loss' ? '\u2193 ' : (d.delta.cls === 'gain' ? '\u2191 ' : '')) + d.delta.text + ' vs prior';
+      html += '</div>';
+    }
+    if (d.lost) html += '<div class="dropoff-detail" style="color:#ef4444;">\u2717 ' + d.lost + '</div>';
+    if (d.detail) html += '<div class="dropoff-detail">' + d.detail + '</div>';
+    html += '</div>';
+  });
+  document.getElementById('dropoff-row').innerHTML = html;
+})();
+
+// ========================================
+// 4. SANKEY (improved with % labels)
+// ========================================
+(function() {
+  var nodes = [
+    'Ad Spend\n$189.9K',         // 0
+    'Workshop Ads\n$170K (89.5%)',  // 1
+    'VSL\n$11.9K (6.3%)',        // 2
+    '5 Shifts\n$8K (4.2%)',      // 3
+    'Tickets\n476',              // 4
+    'Free\n241 (50.6%)',         // 5
+    'Paid $27\n235 (49.4%)',     // 6
+    'VIP $54\n235 (49.4%)',      // 7
+    'Registered\n476',           // 8
+    'Attended\n291 (61.1%)',     // 9
+    'No-Show\n185 (38.9%)',      // 10
+    'VIP Att.\n183 (62.9%)',     // 11
+    'Std Att.\n108 (37.1%)',     // 12
+    'Calls Booked\n238',        // 13
+    'Not Booked\n53 (18.2%)',   // 14
+    'Call Showed\n181 (76.1%)', // 15
+    'No-Show\n40 (16.8%)',      // 16
+    'Cancelled\n17 (7.1%)',     // 17
+    'Matt\n42 (23.2%)',         // 18
+    'Dorian\n45 (24.9%)',       // 19
+    'Colby\n37 (20.4%)',        // 20
+    'Bren\n33 (18.2%)',         // 21
+    'Enrolled\n29 (16.0%)',     // 22
+    'No Sale\n44 (24.3%)',      // 23
+    'Follow Up\n62 (34.3%)',    // 24
+    'No Offer\n22 (12.2%)',     // 25
+    'Cash\n$236.1K',            // 26
+    'Contract\n$288.8K'         // 27
+  ];
+
+  var xPos = [
+    0.001,
+    0.09, 0.09, 0.09,
+    0.20,
+    0.28, 0.28, 0.34,
+    0.42,
+    0.52, 0.52,
+    0.60, 0.60,
+    0.70, 0.70,
+    0.78, 0.78, 0.78,
+    0.86, 0.86, 0.86, 0.86,
+    0.95, 0.95, 0.95, 0.95,
+    0.999, 0.999
+  ];
+  var yPos = [
+    0.45,
+    0.20, 0.55, 0.80,
+    0.40,
+    0.20, 0.50, 0.60,
+    0.40,
+    0.30, 0.82,
+    0.20, 0.50,
+    0.30, 0.78,
+    0.22, 0.62, 0.82,
+    0.10, 0.30, 0.50, 0.68,
+    0.12, 0.35, 0.58, 0.78,
+    0.25, 0.50
+  ];
+
+  // Colors: warm pipeline progression, red for losses
+  var nodeColors = [
+    '#ef4444',                           // 0 Ad Spend
+    '#f87171','#fca5a5','#fca5a5',       // 1-3 Campaigns
+    '#f59e0b',                           // 4 Tickets
+    '#94a3b8','#f59e0b','#facc15',       // 5-7 Free/Paid/VIP
+    '#f59e0b',                           // 8 Registered
+    '#22c55e','#ef4444',                 // 9-10 Attended/NoShow
+    '#facc15','#94a3b8',                 // 11-12 VIP/Std
+    '#3b82f6','#ef4444',                 // 13-14 Booked/NotBooked
+    '#3b82f6','#ef4444','#f59e0b',       // 15-17 Showed/NoShow/Cancel
+    '#60a5fa','#34d399','#fbbf24','#c4b5fd', // 18-21 Closers
+    '#22c55e','#ef4444','#f59e0b','#94a3b8', // 22-25 Outcomes
+    '#8b5cf6','#06b6d4'                  // 26-27 Revenue
+  ];
+
+  var src = [0,0,0, 1,2,3, 4,4, 6, 5,7, 8, 9,9, 11,12,9, 13,13,13, 15,15,15,15, 18,19,20,21, 18,19,20,21, 18,19,20,21, 18,19,20,21, 22,22];
+  var tgt = [1,2,3, 4,4,4, 5,6, 7, 8,8, 9, 9,10, 13,13,14, 15,16,17, 18,19,20,21, 22,22,22,22, 23,23,23,23, 24,24,24,24, 25,25,25,25, 26,27];
+  var val = [170000,11929,8000, 420,32,24, 241,235, 235, 241,235, 476, 291,185, 120,26,53, 181,40,17, 42,45,37,33, 10,9,6,4, 12,14,10,8, 15,16,15,16, 5,6,6,5, 236100,288800];
+  var lbl = [
+    'Workshop: $170K (89.5%)','VSL: $11.9K (6.3%)','5 Shifts: $8K (4.2%)',
+    '420 from workshop ads','32 from VSL','24 from 5 Shifts',
+    '241 free tickets (50.6%)','235 paid $27 (49.4%)','235 VIP upgrade (49.4%)',
+    '241 free > email sequence','235 VIP > email sequence','476 registered',
+    '291 attended (61.1% show rate)','185 no-show (38.9%)',
+    '120 VIP booked calls','26 standard booked calls','53 did not book (18.2%)',
+    '181 showed (76.1%)','40 no-show (16.8%)','17 cancelled (7.1%)',
+    'Matt Dakan: 42 calls (23.2%)','Dorian Matney: 45 calls (24.9%)','Colby Mann: 37 calls (20.4%)','Bren Moran: 33 calls (18.2%)',
+    'Matt: 10 enrolled (31.0%)','Dorian: 9 enrolled (26.7%)','Colby: 6 enrolled (22.7%)','Bren: 4 enrolled (18.2%)',
+    'Matt: 12 no sale','Dorian: 14 no sale','Colby: 10 no sale','Bren: 8 no sale',
+    'Matt: 15 follow-up','Dorian: 16 follow-up','Colby: 15 follow-up','Bren: 16 follow-up',
+    'Matt: 5 no offer','Dorian: 6 no offer','Colby: 6 no offer','Bren: 5 no offer',
+    'Cash Collected: $236.1K','Contract Value: $288.8K'
+  ];
+
+  var linkColors = src.map(function(s) {
+    var c = nodeColors[s] || '#94a3b8';
+    return c + '30';
+  });
+
+  Plotly.newPlot('sankey-chart', [{
+    type: 'sankey',
+    orientation: 'h',
+    arrangement: 'fixed',
+    node: {
+      pad: 22, thickness: 24,
+      line: { color: '#0f172a', width: 2 },
+      label: nodes,
+      color: nodeColors,
+      x: xPos, y: yPos,
+      hovertemplate: '<b>%{label}</b><extra></extra>'
+    },
+    link: {
+      source: src, target: tgt, value: val,
+      color: linkColors,
+      customdata: lbl,
+      hovertemplate: '%{customdata}<extra></extra>'
+    }
+  }], {
+    paper_bgcolor: '#0f172a',
+    plot_bgcolor: '#0f172a',
+    font: { color: '#cbd5e1', family: 'Inter, system-ui, sans-serif', size: 10 },
+    margin: { l: 8, r: 8, t: 8, b: 8 },
+    height: 520
+  }, { displayModeBar: false, responsive: true });
+})();
+
+// ========================================
+// 5. SEGMENT TABLE (like the reference image)
+// ========================================
+(function() {
+  var table = document.getElementById('seg-table');
+  var colHeaders = [
+    { label: 'Tickets', cls: 'th-registration' },
+    { label: 'Attended', cls: 'th-workshop' },
+    { label: 'Show Rate', cls: 'th-workshop' },
+    { label: 'Booked', cls: 'th-sales' },
+    { label: 'Book Rate', cls: 'th-sales' },
+    { label: 'Showed', cls: 'th-sales' },
+    { label: 'Enrolled', cls: 'th-revenue' },
+    { label: 'Close Rate', cls: 'th-revenue' },
+    { label: 'Cash', cls: 'th-outcome' }
+  ];
+
+  var thead = '<thead><tr><th>Segment</th>';
+  colHeaders.forEach(function(h) { thead += '<th class="' + h.cls + '">' + h.label + '</th>'; });
+  thead += '</tr></thead>';
+
+  var total = D.segments.reduce(function(acc, s) {
+    return { tickets: acc.tickets + s.tickets, attended: acc.attended + s.attended, booked: acc.booked + s.booked, showed: acc.showed + s.showed, enrolled: acc.enrolled + s.enrolled, cash: acc.cash + s.cash };
+  }, { tickets: 0, attended: 0, booked: 0, showed: 0, enrolled: 0, cash: 0 });
+
+  var tbody = '<tbody>';
+  D.segments.forEach(function(s) {
+    var showRate = s.tickets ? s.attended / s.tickets : 0;
+    var bookRate = s.attended ? s.booked / s.attended : 0;
+    var closeRate = s.showed ? s.enrolled / s.showed : 0;
+    var ticketPct = total.tickets ? s.tickets / total.tickets : 0;
+
+    tbody += '<tr>';
+    tbody += '<td>' + s.name + '</td>';
+    tbody += '<td><span class="cell-pct pct-yellow">' + pct(ticketPct) + '</span><span class="cell-abs">' + fmtN(s.tickets) + '</span></td>';
+    tbody += '<td><span class="cell-pct pct-green">' + pct(s.attended / total.attended) + '</span><span class="cell-abs">' + fmtN(s.attended) + '</span></td>';
+    tbody += '<td><span class="cell-pct ' + (showRate >= 0.60 ? 'pct-green' : 'pct-red') + '">' + pct(showRate) + '</span></td>';
+    tbody += '<td><span class="cell-pct pct-blue">' + pct(s.booked / total.booked) + '</span><span class="cell-abs">' + fmtN(s.booked) + '</span></td>';
+    tbody += '<td><span class="cell-pct ' + (bookRate >= 0.40 ? 'pct-green' : 'pct-yellow') + '">' + pct(bookRate) + '</span></td>';
+    tbody += '<td><span class="cell-pct pct-blue">' + fmtN(s.showed) + '</span></td>';
+    tbody += '<td><span class="cell-pct pct-purple">' + fmtN(s.enrolled) + '</span></td>';
+    tbody += '<td><span class="cell-pct ' + (closeRate >= 0.20 ? 'pct-green' : 'pct-red') + '">' + pct(closeRate) + '</span></td>';
+    tbody += '<td><span class="cell-pct pct-cyan">' + fmt(s.cash) + '</span></td>';
+    tbody += '</tr>';
+  });
+  tbody += '</tbody>';
+
+  table.innerHTML = thead + tbody;
+
+  // Closer cards
+  var grid = document.getElementById('closer-grid');
+  var closerHtml = '';
+  D.closers.forEach(function(c) {
+    var rateColor = c.rate >= 0.25 ? '#22c55e' : (c.rate >= 0.20 ? '#f59e0b' : '#ef4444');
+    closerHtml += '<div class="closer-card">';
+    closerHtml += '<div class="cc-name">' + c.name + '</div>';
+    closerHtml += '<div class="cc-row"><span class="cc-label">Close Rate</span><span class="cc-rate" style="color:' + rateColor + '">' + pct(c.rate) + '</span></div>';
+    closerHtml += '<div class="cc-row"><span class="cc-label">Calls Taken</span><span class="cc-val">' + c.calls + '</span></div>';
+    closerHtml += '<div class="cc-row"><span class="cc-label">Enrolled</span><span class="cc-val">' + c.enrolled + '</span></div>';
+    closerHtml += '<div class="cc-row"><span class="cc-label">Cash Collected</span><span class="cc-val">' + fmt(c.cash) + '</span></div>';
+    closerHtml += '<div class="cc-row"><span class="cc-label">No Sale</span><span class="cc-val" style="color:#ef4444">' + c.noSale + '</span></div>';
+    closerHtml += '<div class="cc-row"><span class="cc-label">Follow Up</span><span class="cc-val" style="color:#f59e0b">' + c.followUp + '</span></div>';
+    closerHtml += '</div>';
+  });
+  grid.innerHTML = closerHtml;
+})();
+</script>
+</body>
+</html>
