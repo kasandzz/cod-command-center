@@ -20,7 +20,37 @@
       <div class="filter-bar" id="filter-bar"></div>
     </div>
     <div class="page-content">
-      <p style="color: var(--text-muted);">Coming soon...</p>
+      <p class="war-room-disclaimer" style="color:var(--text-muted);font-size:12px;margin-bottom:16px;">Today's data is always partial. All metrics exclude current day.<br>Revenue includes GHL-tracked sales only.</p>
+
+      <!-- KPI Grid -->
+      <div class="kpi-grid" id="kpi-grid"></div>
+
+      <!-- Revenue Trend Chart -->
+      <div class="chart-container">
+        <h3>Daily Revenue Trend</h3>
+        <div class="chart-wrapper">
+          <canvas id="revenue-chart"></canvas>
+        </div>
+      </div>
+
+      <!-- Weekly Summary Table -->
+      <div class="table-container" style="background:var(--bg-card);border-radius:8px;overflow:hidden;">
+        <h3 style="color:var(--text-secondary);font-size:14px;font-weight:400;padding:16px 16px 0;">This Week</h3>
+        <table class="data-table" id="weekly-table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Revenue</th>
+              <th>Spend</th>
+              <th>ROAS</th>
+              <th>Leads</th>
+              <th>Shows</th>
+              <th>Enrolls</th>
+            </tr>
+          </thead>
+          <tbody id="weekly-body"></tbody>
+        </table>
+      </div>
     </div>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
@@ -28,5 +58,7 @@
   <script src="../assets/js/components.js"></script>
   <script src="../assets/js/filters.js"></script>
   <script src="../assets/js/app.js"></script>
+  <script src="../assets/js/data-utils.js"></script>
+  <script src="../assets/js/war-room.js"></script>
 </body>
 </html>
