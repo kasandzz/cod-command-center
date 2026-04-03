@@ -6,20 +6,20 @@ var KPI_CONFIG = [
   { key: 'ad_spend', label: 'Ad Spend', format: formatCurrency, inverted: true },
   { key: 'roas_cash', label: 'ROAS (Cash)', format: formatMultiplier, inverted: false },
   { key: 'enrollments', label: 'Enrollments', format: formatNumber, inverted: false },
-  { key: 'show_rate', label: 'Show Rate', format: formatPercent, inverted: false },
-  { key: 'close_rate', label: 'Close Rate', format: formatPercent, inverted: false },
+  { key: 'leads', label: 'Total Leads', format: formatNumber, inverted: false },
   { key: 'dpl_cash', label: 'DPL (Cash)', format: formatCurrency, inverted: false },
+  { key: 'cpa', label: 'Cost to Acquire', format: formatCurrency, inverted: true },
   { key: 'funnel_health', label: 'Funnel Health', format: function(v) { return Math.min(v, 100) + '/100'; }, inverted: false }
 ];
 
 var KPI_TARGETS = {
   revenue_cash: null,
   ad_spend: null,
-  roas_cash: 3.0,
-  enrollments: 15,
-  show_rate: 0.65,
-  close_rate: 0.25,
-  dpl_cash: 8000,
+  roas_cash: 2.0,
+  enrollments: 35,
+  leads: 1500,
+  dpl_cash: 1500,
+  cpa: 5000,
   funnel_health: 70
 };
 
@@ -243,7 +243,7 @@ function renderWeeklyTable(weeklySummary) {
       '<td class="mono">' + formatCurrency(row.spend) + '</td>' +
       '<td class="mono">' + formatMultiplier(row.roas) + '</td>' +
       '<td class="mono">' + row.leads + '</td>' +
-      '<td class="mono">' + row.shows + '</td>' +
+      '<td class="mono">' + row.bookings + '</td>' +
       '<td class="mono">' + row.enrolls + '</td>';
     tbody.appendChild(tr);
   });
