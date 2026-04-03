@@ -1,0 +1,17 @@
+{
+  "generated_at": "2026-04-02T06:00:00Z",
+  "period": { "from": "2026-03-03", "to": "2026-04-01" },
+  "funnel_stages": [
+    { "stage": "Lead", "volume": 1204, "conversion_rate": 1.0 },
+    { "stage": "Application", "volume": 181, "conversion_rate": 0.150 },
+    { "stage": "Booked", "volume": 96, "conversion_rate": 0.530 },
+    { "stage": "Showed", "volume": 64, "conversion_rate": 0.667 },
+    { "stage": "Enrolled", "volume": 16, "conversion_rate": 0.250 }
+  ],
+  "stage_targets": {
+    "lead_to_app": 0.15,
+    "app_to_booked": 0.53,
+    "booked_to_showed": 0.67,
+    "showed_to_enrolled": 0.25
+  }
+}

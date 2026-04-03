@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-04-02T06:00:00Z",
+  "period": { "from": "2026-03-03", "to": "2026-04-01" },
+  "campaigns": [
+    { "name": "FB - Workshop Registration - Broad", "type": "Facebook", "spend": 3200, "revenue": 35200, "roas": 11.0, "leads": 420, "cpl": 7.62 },
+    { "name": "FB - Workshop Registration - Lookalike", "type": "Facebook", "spend": 2800, "revenue": 28000, "roas": 10.0, "leads": 310, "cpl": 9.03 },
+    { "name": "FB - Retargeting - Video Viewers", "type": "Facebook", "spend": 1400, "revenue": 16800, "roas": 12.0, "leads": 95, "cpl": 14.74 },
+    { "name": "YT - Workshop Invite - In-Stream", "type": "YouTube", "spend": 2100, "revenue": 18900, "roas": 9.0, "leads": 180, "cpl": 11.67 },
+    { "name": "YT - Testimonial Cuts", "type": "YouTube", "spend": 1200, "revenue": 10800, "roas": 9.0, "leads": 85, "cpl": 14.12 },
+    { "name": "Google - Brand Search", "type": "Google", "spend": 800, "revenue": 8000, "roas": 10.0, "leads": 54, "cpl": 14.81 },
+    { "name": "Google - Coaching Keywords", "type": "Google", "spend": 600, "revenue": 4200, "roas": 7.0, "leads": 42, "cpl": 14.29 },
+    { "name": "FB - VSL Funnel Test", "type": "Facebook", "spend": 200, "revenue": 1500, "roas": 7.5, "leads": 18, "cpl": 11.11 }
+  ],
+  "spend_by_type": [
+    { "type": "Facebook", "spend": 7600 },
+    { "type": "YouTube", "spend": 3300 },
+    { "type": "Google", "spend": 1400 }
+  ]
+}

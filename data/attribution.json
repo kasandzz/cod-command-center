@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-04-02T06:00:00Z",
+  "period": { "from": "2026-03-03", "to": "2026-04-01" },
+  "sources": [
+    { "source": "Facebook - Broad", "leads": 420, "sales": 5, "revenue": 42000, "roas": 13.13 },
+    { "source": "Facebook - Lookalike", "leads": 310, "sales": 3, "revenue": 27000, "roas": 9.64 },
+    { "source": "Facebook - Retargeting", "leads": 95, "sales": 2, "revenue": 18000, "roas": 12.86 },
+    { "source": "YouTube - In-Stream", "leads": 180, "sales": 2, "revenue": 16800, "roas": 8.00 },
+    { "source": "YouTube - Testimonials", "leads": 85, "sales": 1, "revenue": 8500, "roas": 7.08 },
+    { "source": "Google - Brand", "leads": 54, "sales": 1, "revenue": 8000, "roas": 10.00 },
+    { "source": "Google - Keywords", "leads": 42, "sales": 1, "revenue": 8500, "roas": 14.17 },
+    { "source": "Organic - Social", "leads": 68, "sales": 1, "revenue": 9200, "roas": null },
+    { "source": "Referral", "leads": 32, "sales": 1, "revenue": 8500, "roas": null },
+    { "source": "Email List", "leads": 18, "sales": 1, "revenue": 7900, "roas": null }
+  ],
+  "segments": [
+    { "segment": "Lawyers", "leads": 185, "enrollments": 3, "revenue": 31500, "avg_deal_size": 10500 },
+    { "segment": "Educators", "leads": 210, "enrollments": 3, "revenue": 25200, "avg_deal_size": 8400 },
+    { "segment": "Coaches", "leads": 165, "enrollments": 2, "revenue": 19600, "avg_deal_size": 9800 },
+    { "segment": "Real Estate", "leads": 148, "enrollments": 2, "revenue": 16800, "avg_deal_size": 8400 },
+    { "segment": "Financial Advisors", "leads": 120, "enrollments": 2, "revenue": 18400, "avg_deal_size": 9200 },
+    { "segment": "Healthcare", "leads": 95, "enrollments": 2, "revenue": 14800, "avg_deal_size": 7400 },
+    { "segment": "Entrepreneurs", "leads": 175, "enrollments": 1, "revenue": 8500, "avg_deal_size": 8500 },
+    { "segment": "Other", "leads": 106, "enrollments": 1, "revenue": 8600, "avg_deal_size": 8600 }
+  ]
+}

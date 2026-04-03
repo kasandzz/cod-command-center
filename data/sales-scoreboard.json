@@ -1,0 +1,38 @@
+{
+  "generated_at": "2026-04-02T06:00:00Z",
+  "period": { "from": "2026-03-03", "to": "2026-04-01" },
+  "closers": [
+    { "name": "Closer A", "close_rate": 0.31, "show_rate": 0.72, "dpl": 9800, "revenue": 39200, "calls": 16, "enrollments": 4 },
+    { "name": "Closer B", "close_rate": 0.27, "show_rate": 0.68, "dpl": 8500, "revenue": 34000, "calls": 15, "enrollments": 4 },
+    { "name": "Closer C", "close_rate": 0.23, "show_rate": 0.65, "dpl": 7200, "revenue": 21600, "calls": 13, "enrollments": 3 },
+    { "name": "Closer D", "close_rate": 0.20, "show_rate": 0.70, "dpl": 8000, "revenue": 16000, "calls": 10, "enrollments": 2 },
+    { "name": "Closer E", "close_rate": 0.18, "show_rate": 0.60, "dpl": 6300, "revenue": 12600, "calls": 10, "enrollments": 2 }
+  ],
+  "call_dispositions": [
+    { "closer": "Closer A", "outcome": "Enrolled", "count": 4 },
+    { "closer": "Closer A", "outcome": "No Show", "count": 4 },
+    { "closer": "Closer A", "outcome": "Not Qualified", "count": 2 },
+    { "closer": "Closer A", "outcome": "Money Objection", "count": 3 },
+    { "closer": "Closer A", "outcome": "Needs Follow-up", "count": 3 },
+    { "closer": "Closer B", "outcome": "Enrolled", "count": 4 },
+    { "closer": "Closer B", "outcome": "No Show", "count": 5 },
+    { "closer": "Closer B", "outcome": "Not Qualified", "count": 2 },
+    { "closer": "Closer B", "outcome": "Money Objection", "count": 2 },
+    { "closer": "Closer B", "outcome": "Needs Follow-up", "count": 2 },
+    { "closer": "Closer C", "outcome": "Enrolled", "count": 3 },
+    { "closer": "Closer C", "outcome": "No Show", "count": 4 },
+    { "closer": "Closer C", "outcome": "Not Qualified", "count": 3 },
+    { "closer": "Closer C", "outcome": "Money Objection", "count": 2 },
+    { "closer": "Closer C", "outcome": "Needs Follow-up", "count": 1 },
+    { "closer": "Closer D", "outcome": "Enrolled", "count": 2 },
+    { "closer": "Closer D", "outcome": "No Show", "count": 3 },
+    { "closer": "Closer D", "outcome": "Not Qualified", "count": 2 },
+    { "closer": "Closer D", "outcome": "Money Objection", "count": 2 },
+    { "closer": "Closer D", "outcome": "Needs Follow-up", "count": 1 },
+    { "closer": "Closer E", "outcome": "Enrolled", "count": 2 },
+    { "closer": "Closer E", "outcome": "No Show", "count": 4 },
+    { "closer": "Closer E", "outcome": "Not Qualified", "count": 1 },
+    { "closer": "Closer E", "outcome": "Money Objection", "count": 2 },
+    { "closer": "Closer E", "outcome": "Needs Follow-up", "count": 1 }
+  ]
+}

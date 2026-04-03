@@ -1,0 +1,41 @@
+{
+  "generated_at": "2026-04-02T06:00:00Z",
+  "experiments": [
+    {
+      "id": "EXP-001",
+      "name": "VIP Workshop Upsell at Registration",
+      "status": "complete",
+      "description": "Test offering a $97 VIP upgrade during workshop registration to increase show rates and commitment.",
+      "start_date": "2026-02-10",
+      "end_date": "2026-03-10",
+      "result": "VIP show rate 78% vs standard 52%. Revenue per registrant up 34%. Rolling out permanently."
+    },
+    {
+      "id": "EXP-002",
+      "name": "SMS Reminder Sequence Before Workshop",
+      "status": "running",
+      "description": "Add 3-touch SMS sequence (24h, 2h, 15min before) to boost workshop show rates alongside existing email sequence.",
+      "start_date": "2026-03-17",
+      "end_date": "2026-04-14",
+      "result": "Preliminary: +8% show rate improvement. Awaiting full 4-week data."
+    },
+    {
+      "id": "EXP-003",
+      "name": "Shortened Sales Call Script (30 min vs 45 min)",
+      "status": "running",
+      "description": "Test condensed 30-minute call framework focusing on pain amplification and single objection handling vs current 45-min script.",
+      "start_date": "2026-03-24",
+      "end_date": "2026-04-21",
+      "result": "Early data: close rate holding at 24% with 33% less closer time. Need more volume."
+    },
+    {
+      "id": "EXP-004",
+      "name": "YouTube Shorts Retargeting Funnel",
+      "status": "proposed",
+      "description": "Create 15-second testimonial clips as YouTube Shorts, retarget viewers with workshop registration ads. Hypothesis: lower CPL than current in-stream approach.",
+      "start_date": "2026-04-07",
+      "end_date": null,
+      "result": null
+    }
+  ]
+}

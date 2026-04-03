@@ -1,0 +1,33 @@
+{
+  "generated_at": "2026-04-02T06:00:00Z",
+  "competitors": [
+    {
+      "name": "Dan Lok - High Ticket Closer",
+      "offer": "High Ticket Closer Certification + Inner Circle mastermind",
+      "price": "$2,500 - $30,000",
+      "funnel_type": "Webinar -> Application -> Sales Call",
+      "notes": "Heavy YouTube presence. Shifted toward certification model. Large affiliate network drives traffic. Weaker on personalized coaching, stronger on brand recognition."
+    },
+    {
+      "name": "Myron Golden - Offer Mastery",
+      "offer": "Make More Offers Challenge + Mastermind",
+      "price": "$997 - $25,000",
+      "funnel_type": "Challenge -> Upsell -> Application -> Call",
+      "notes": "Challenge model converts well. Strong organic social proof from live events. Focuses on offer creation rather than full business coaching. Appeals to faith-based audience."
+    },
+    {
+      "name": "Cole Gordon - Remote Closing Academy",
+      "offer": "Closer training + agency placement program",
+      "price": "$5,000 - $15,000",
+      "funnel_type": "VSL -> Application -> Sales Call",
+      "notes": "Direct competitor in the closer training space. Strong case studies. Recently expanded into agency-side training. Younger demographic. Fast-growing YouTube channel."
+    },
+    {
+      "name": "Hormozi - Skool / Acquisition.com",
+      "offer": "Free community + portfolio company growth partnerships",
+      "price": "Free - equity deals",
+      "funnel_type": "Content -> Community -> Application",
+      "notes": "Not direct competitor but pulls attention from same audience. Free content strategy pressures paid models. Skool community platform gaining traction. Different business model but overlapping ICP."
+    }
+  ]
+}

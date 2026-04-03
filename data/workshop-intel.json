@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-04-02T06:00:00Z",
+  "period": { "from": "2026-03-03", "to": "2026-04-01" },
+  "show_rates": [
+    { "week": "2026-03-03", "vip_rate": 0.78, "standard_rate": 0.52, "overall_rate": 0.61 },
+    { "week": "2026-03-10", "vip_rate": 0.81, "standard_rate": 0.49, "overall_rate": 0.58 },
+    { "week": "2026-03-17", "vip_rate": 0.76, "standard_rate": 0.55, "overall_rate": 0.63 },
+    { "week": "2026-03-24", "vip_rate": 0.82, "standard_rate": 0.54, "overall_rate": 0.64 }
+  ],
+  "booking_funnel": {
+    "registered": 348,
+    "confirmed": 278,
+    "showed": 192,
+    "converted": 16
+  },
+  "schedule_heatmap": [
+    { "day": "Mon", "hour": 10, "show_rate": 0.58 },
+    { "day": "Mon", "hour": 12, "show_rate": 0.62 },
+    { "day": "Mon", "hour": 14, "show_rate": 0.65 },
+    { "day": "Mon", "hour": 18, "show_rate": 0.60 },
+    { "day": "Tue", "hour": 10, "show_rate": 0.64 },
+    { "day": "Tue", "hour": 12, "show_rate": 0.68 },
+    { "day": "Tue", "hour": 14, "show_rate": 0.71 },
+    { "day": "Tue", "hour": 18, "show_rate": 0.66 },
+    { "day": "Wed", "hour": 10, "show_rate": 0.70 },
+    { "day": "Wed", "hour": 12, "show_rate": 0.74 },
+    { "day": "Wed", "hour": 14, "show_rate": 0.78 },
+    { "day": "Wed", "hour": 18, "show_rate": 0.72 },
+    { "day": "Thu", "hour": 10, "show_rate": 0.72 },
+    { "day": "Thu", "hour": 12, "show_rate": 0.76 },
+    { "day": "Thu", "hour": 14, "show_rate": 0.80 },
+    { "day": "Thu", "hour": 18, "show_rate": 0.74 },
+    { "day": "Fri", "hour": 10, "show_rate": 0.56 },
+    { "day": "Fri", "hour": 12, "show_rate": 0.60 },
+    { "day": "Fri", "hour": 14, "show_rate": 0.63 },
+    { "day": "Fri", "hour": 18, "show_rate": 0.55 },
+    { "day": "Sat", "hour": 10, "show_rate": 0.50 },
+    { "day": "Sat", "hour": 12, "show_rate": 0.54 },
+    { "day": "Sat", "hour": 14, "show_rate": 0.52 },
+    { "day": "Sat", "hour": 18, "show_rate": 0.48 },
+    { "day": "Sun", "hour": 10, "show_rate": 0.52 },
+    { "day": "Sun", "hour": 12, "show_rate": 0.56 },
+    { "day": "Sun", "hour": 14, "show_rate": 0.54 },
+    { "day": "Sun", "hour": 18, "show_rate": 0.50 }
+  ]
+}

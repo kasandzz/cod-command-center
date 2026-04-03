@@ -1,0 +1,23 @@
+{
+  "generated_at": "2026-04-02T06:00:00Z",
+  "period": { "from": "2026-03-03", "to": "2026-04-01" },
+  "monthly_revenue": [
+    { "month": "2025-11", "cash": 72400, "contract": 98000 },
+    { "month": "2025-12", "cash": 85600, "contract": 112000 },
+    { "month": "2026-01", "cash": 91200, "contract": 124000 },
+    { "month": "2026-02", "cash": 98700, "contract": 135000 },
+    { "month": "2026-03", "cash": 123400, "contract": 168000 },
+    { "month": "2026-04", "cash": 5500, "contract": 16000 }
+  ],
+  "product_mix": [
+    { "product": "COD", "revenue": 85000, "percentage": 0.69 },
+    { "product": "Lion's Pride", "revenue": 28000, "percentage": 0.23 },
+    { "product": "Millionaire Alliance", "revenue": 10400, "percentage": 0.08 }
+  ],
+  "payment_split": {
+    "pif_count": 5,
+    "pif_revenue": 45000,
+    "split_count": 7,
+    "split_revenue": 78400
+  }
+}
