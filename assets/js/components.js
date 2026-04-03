@@ -29,6 +29,7 @@ async function initComponents() {
   await Promise.all([
     injectComponent('sidebar-mount', base + 'sidebar.html'),
     injectComponent('header-mount', base + 'header.html'),
+    injectComponent('notes-mount', base + 'notes-panel.html'),
   ]);
   highlightCurrentPage();
 }
