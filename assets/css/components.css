@@ -448,3 +448,178 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ---- Biggest Wins / Biggest Leaks Cards ---- */
+.wins-card,
+.leaks-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.wins-card { border-left: 3px solid var(--status-up); }
+.leaks-card { border-left: 3px solid var(--status-down); }
+
+.wins-card::before,
+.leaks-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  pointer-events: none;
+  opacity: 0.04;
+}
+.wins-card::before { background: linear-gradient(135deg, var(--status-up) 0%, transparent 60%); }
+.leaks-card::before { background: linear-gradient(135deg, var(--status-down) 0%, transparent 60%); }
+
+.wins-card__header,
+.leaks-card__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+.wins-card__header { color: var(--status-up); }
+.leaks-card__header { color: var(--status-down); }
+
+.wins-card__list,
+.leaks-card__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wins-card__list li,
+.leaks-card__list li {
+  font-size: 13px;
+  color: var(--text-primary);
+  padding-left: 16px;
+  position: relative;
+  line-height: 1.5;
+}
+
+.wins-card__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--status-up);
+}
+
+.leaks-card__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--status-down);
+}
+
+.wins-card__list .signal-value,
+.leaks-card__list .signal-value {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- Channel Breakdown Bars ---- */
+.channel-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.channel-bar-row__label {
+  width: 90px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.channel-bar-row__track {
+  flex: 1;
+  height: 24px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.channel-bar-row__fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+  min-width: 2px;
+}
+
+.channel-bar-row__count {
+  width: 48px;
+  font-size: 13px;
+  font-family: var(--font-mono);
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.channel-bar-row__pct {
+  width: 44px;
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* ---- Calls KPIs (Close Rate / No-Show / Total) ---- */
+.calls-kpis {
+  display: flex;
+  gap: 24px;
+  padding-top: 8px;
+}
+
+.calls-kpi {
+  flex: 1;
+  text-align: center;
+}
+
+.calls-kpi__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.calls-kpi__value {
+  font-family: var(--font-mono);
+  font-size: 32px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.calls-kpi__delta {
+  font-size: 12px;
+  font-family: var(--font-mono);
+}
+.calls-kpi__delta.up { color: var(--status-up); }
+.calls-kpi__delta.down { color: var(--status-down); }
+.calls-kpi__delta.neutral { color: var(--status-neutral); }

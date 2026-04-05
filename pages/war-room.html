@@ -22,8 +22,54 @@
     <div class="page-content">
       <p class="war-room-disclaimer" style="color:var(--text-muted);font-size:12px;margin-bottom:16px;">Today's data is always partial. All metrics exclude current day.<br>Revenue includes GHL-tracked sales only.</p>
 
+      <!-- Biggest Wins / Biggest Leaks -->
+      <div class="chart-row" id="wins-leaks-row">
+        <div class="wins-card" id="wins-card">
+          <div class="wins-card__header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+            <span>Biggest Wins</span>
+          </div>
+          <ul class="wins-card__list" id="wins-list"></ul>
+        </div>
+        <div class="leaks-card" id="leaks-card">
+          <div class="leaks-card__header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            <span>Biggest Leaks</span>
+          </div>
+          <ul class="leaks-card__list" id="leaks-list"></ul>
+        </div>
+      </div>
+
       <!-- KPI Grid -->
       <div class="kpi-grid" id="kpi-grid"></div>
+
+      <!-- Calls Intelligence: Channel Breakdown + Close/No-Show -->
+      <div class="chart-row" id="calls-intel-row">
+        <div class="chart-container" style="margin-bottom:0;">
+          <h3>Calls Booked by Channel</h3>
+          <div id="channel-bars"></div>
+        </div>
+        <div class="chart-container" style="margin-bottom:0;">
+          <h3>Call Performance</h3>
+          <div class="calls-kpis" id="calls-kpis">
+            <div class="calls-kpi">
+              <div class="calls-kpi__label">Close Rate</div>
+              <div class="calls-kpi__value" id="close-rate-val">--</div>
+              <div class="calls-kpi__delta" id="close-rate-delta"></div>
+            </div>
+            <div class="calls-kpi">
+              <div class="calls-kpi__label">No-Show Rate</div>
+              <div class="calls-kpi__value" id="noshow-rate-val">--</div>
+              <div class="calls-kpi__delta" id="noshow-rate-delta"></div>
+            </div>
+            <div class="calls-kpi">
+              <div class="calls-kpi__label">Total Calls</div>
+              <div class="calls-kpi__value" id="total-calls-val">--</div>
+              <div class="calls-kpi__delta" id="total-calls-delta"></div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- Revenue Trend Chart -->
       <div class="chart-container">
